@@ -22,7 +22,9 @@ import sqlite3
 
 
 
-startHTML = "<html><head><title>CS302 example</title><link rel='stylesheet' href='/static/example.css' /></head><body>"
+#startHTML = "<html><head><title>CS302 example</title><link rel='stylesheet' href='/static/example.css' /></head><body>"
+startHTML = '<!DOCTYPE html><html><body background="https://images3.alphacoders.com/189/thumb-1920-189705.jpg"></body></html>' #for the BG
+startHTML +=  '<center><!DOCTYPE html><html><head><style>h1{font-size: 300%;color:white;}</style></head><body><h1>Ahmad Umars Prototype</h1></body></html>'
 
 
 class MainApp(object):
@@ -47,7 +49,9 @@ class MainApp(object):
     # PAGES (which return HTML that can be viewed in browser)
     @cherrypy.expose
     def index(self):
-        Page = startHTML + "Welcome! This is a prototype for a socialising web app!<br/>"
+        Page = startHTML
+        Page +=  '<center><!DOCTYPE html><html><head><style>h1{font-size: 200%;color:black;}</style></head><body><h1>Welcome! This is a prototype for a socialising web app!</h1></body></html>'
+        
 
         try:
             Page += "Hello " + cherrypy.session['username'] + "!<br/>"
@@ -73,13 +77,13 @@ class MainApp(object):
 
 
             Page += '<form action="/api/tx_broadcast" method="post" enctype="multipart/form-data">'
-            Page += 'Type your post: <input name="message"/>'
+            Page += '&emsp;&emsp;&emsp;&emsp;Type your post: <input name="message"/>'
             Page += '<input type="submit" value="Publish"/></form>'
 
             Page += "<br> </br>"
 
             Page += '<form action="/api/tx_privatemessage" method="post" enctype="multipart/form-data">'
-            Page += 'Type your private message &emsp; &emsp; &emsp; : <input name="message"/> </br>'
+            Page += 'Type your private message &#160;&#160;  : <input name="message"/> </br>'
             Page += 'Type your receivers username(upi) : <input name="upi"/>'
             Page += '<input type="submit" value="Send"/></form>'
 
@@ -107,7 +111,8 @@ class MainApp(object):
             Page += '<input type="submit" value="Unblock"/></form>'
 
         except KeyError:  # There is no username
-            Page += "Click here to <a href='login'>login</a>."
+            Page += '<center><!DOCTYPE html><html><style>.button{border: none;color: white;padding: 16px 32px;text-align: center;text-decoration: none;display:inline-block;font-family: verdana;font-size: 20px;margin: 4px 2px;-webkit-transition-duration: 0.4s;}.button{background-color: white;color: black;border-radius:12px;border: 2px solid #555555;}.button:hover{background-color:#555555;color: white;}</style><button class="button button"><a href="login">LOG IN</a></button></html>'
+            #Page += "Click here to <a href='login'>login</a>."
         return Page
 
     @cherrypy.expose
@@ -118,7 +123,7 @@ class MainApp(object):
 
         Page += '<form action="/signin" method="post" enctype="multipart/form-data">'
         Page += 'Username: <input type="text" name="username"/><br/>'
-        Page += 'Password: <input type="password" name="password"/>'
+        Page += '&emsp;&emsp;&emsp;Password  : <input type="password" name="password"/>'
         Page += '<input type="submit" value="Login"/></form>'
         return Page
 
